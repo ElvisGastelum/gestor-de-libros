@@ -1,0 +1,12 @@
+C:\Users\Yisus\Documents\SharpDevelop Projects\Gestor_De_Libros\Gestor_De_Libros\bin\Debug\Gestor_De_Libros.exe.config
+C:\Users\Yisus\Documents\SharpDevelop Projects\Gestor_De_Libros\Gestor_De_Libros\bin\Debug\Gestor_De_Libros.exe
+C:\Users\Yisus\Documents\SharpDevelop Projects\Gestor_De_Libros\Gestor_De_Libros\bin\Debug\Gestor_De_Libros.pdb
+C:\Users\Yisus\Documents\SharpDevelop Projects\Gestor_De_Libros\Gestor_De_Libros\obj\Debug\Gestor_De_Libros.csprojResolveAssemblyReference.cache
+C:\Users\Yisus\Documents\SharpDevelop Projects\Gestor_De_Libros\Gestor_De_Libros\obj\Debug\Gestor_De_Libros.exe
+C:\Users\Yisus\Documents\SharpDevelop Projects\Gestor_De_Libros\Gestor_De_Libros\obj\Debug\Gestor_De_Libros.pdb
+C:\Users\Admin\Desktop\Gestor_De_Libros\Gestor_De_Libros\bin\Debug\Gestor_De_Libros.exe.config
+C:\Users\Admin\Desktop\Gestor_De_Libros\Gestor_De_Libros\bin\Debug\Gestor_De_Libros.exe
+C:\Users\Admin\Desktop\Gestor_De_Libros\Gestor_De_Libros\bin\Debug\Gestor_De_Libros.pdb
+C:\Users\Admin\Desktop\Gestor_De_Libros\Gestor_De_Libros\obj\Debug\Gestor_De_Libros.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\Gestor_De_Libros\Gestor_De_Libros\obj\Debug\Gestor_De_Libros.exe
+C:\Users\Admin\Desktop\Gestor_De_Libros\Gestor_De_Libros\obj\Debug\Gestor_De_Libros.pdb
