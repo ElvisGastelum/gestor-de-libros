@@ -74,7 +74,6 @@ namespace Gestor_De_Libros
 		public void WriteInFile(string message , string path){
 			// Create a file to write to.
 			using (StreamWriter sw = new StreamWriter(path, true)){
-				sw.BaseStream.Seek(0,SeekOrigin.End);
 		    	sw.WriteLine(message);
 		    }
 		}// End of WriteInFile()
@@ -91,7 +90,6 @@ namespace Gestor_De_Libros
 			string lines = null;
 			using (StreamReader sr = File.OpenText(path)){
 				lines = sr.ReadToEnd();
-				Console.WriteLine(sr.ReadToEnd());
 		    }
 			return lines;
 		}
