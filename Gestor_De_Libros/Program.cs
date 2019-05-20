@@ -27,7 +27,7 @@ namespace Gestor_De_Libros
 			CreateDataForDefault();
 			
 			
-			Console.ReadKey(true);
+			
 			Function.Login();
 			Console.Clear();
 			
@@ -126,47 +126,30 @@ namespace Gestor_De_Libros
 		            Function.WriteInFile("admin", pathUsersLog);
 		        }
 		
-		        // Open the file to read from.
-				Console.WriteLine(Function.ReadFile(pathUsersLog));
+		        
 			}else{
-				Console.WriteLine("The path already exists :)");
 				if (!File.Exists(pathUsersLog))
 		        {
 					Function.WriteInFile("admin", pathUsersLog);
 		            Function.WriteInFile("admin", pathUsersLog);
 		        }
-				Console.WriteLine(Function.ReadFile(pathUsersLog));
-				Console.ReadKey(true);
 			}
 			
 			if (!Directory.Exists(pathRegistry)) {
-				Function.CreateDirectory(pathRegistry);
-				Function.CreateDirectory(pathBooks);
+				Function.CreateDirectory(program.PathDataProject +  @"\Registry\Books");
 				
-				CreateBook(pathBooks, "1. La Biblia de CSharp - Anaya");
-		
-		        // Open the file to read from.
-		        using (StreamReader sr = File.OpenText(pathUsersLog))
-		        {
-		            string s;
-		            while ((s = sr.ReadLine()) != null)
-		            {
-		                Console.WriteLine(s);
-		            }
-		        }
+				CreateBook(program.PathDataProject +  @"\Registry\Books\", "1. La Biblia de CSharp - Anaya");
 			}
 			
 		} // End of CreateDataForDefault()
 		
 		public static void CreateBook( string pathBook, string name){
+			Utilities Function = new Utilities();
 			string pathComplete = pathBook + name + @".txt";
 			if (!File.Exists(pathComplete))
 			{
 				// Create a file to write to.
-				using (StreamWriter sw = File.CreateText(pathComplete))
-				{
-					sw.WriteLine(name);
-				}
+				Function.WriteInFile(name, pathComplete);
 			}
 		}// End of CreateBook()
 		
