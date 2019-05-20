@@ -57,28 +57,40 @@ namespace Gestor_De_Libros
 					case 1:
 						Console.Clear();
 						Console.Title = "Biblioteca";
-						string ruta= @"C:\dataProject\Libros\Faker.txt";
-						string lectura;
-						StreamReader flujodelectura=null;
-			
+						Console.WriteLine("A continuación, se muestran los libros disponibles:\n");
+						Function.ListOfBooks();
+						
+						Console.WriteLine("\n¿Qué libro desea elegir?");
+						Console.Write("\nRespuesta: ");
+						
+						int BookSelected = 0;
 						try{
-				
-						flujodelectura = new StreamReader(ruta);
-							while (!flujodelectura.EndOfStream){
-								lectura = flujodelectura.ReadLine();
-								Console.WriteLine(lectura);
-								
-							}
-						} catch (Exception e){
-							
-							Console.WriteLine("Error: " + e.Message);
-						}finally{
-							if(flujodelectura!=null){
-								flujodelectura.Close();
-							}
-							
+						BookSelected = Convert.ToInt32(Console.ReadLine());
+						}catch(Exception e){
+							Console.WriteLine(e.Message);
+						}
+						
+							if(BookSelected == 1){
+							Console.Clear();
+							string Ruta= File.ReadAllText(@"C:\Users\Yisus\Desktop\gestor-de-libros-master\Gestor_De_Libros\archives\Libros\Caperucita Roja.txt");
+							Console.WriteLine(Ruta);
 							Console.ReadKey();
-							
+							}
+						
+						if(BookSelected == 2){
+							Console.Clear();
+							string Ruta= File.ReadAllText(@"C:\Users\Yisus\Desktop\gestor-de-libros-master\Gestor_De_Libros\archives\Libros\La Biblia de CSharp - Anaya.txt");
+							Console.WriteLine(Ruta);
+							Console.ReadKey();
+							}
+						
+							if(BookSelected == 3){
+							Console.Clear();
+							string Ruta = File.ReadAllText(@"C:\Users\Yisus\Desktop\gestor-de-libros-master\Gestor_De_Libros\archives\Libros\Libros\Los 3 Cochinitos.txt");
+							Console.WriteLine(Ruta);
+							Console.ReadKey();
+						}else{
+							continue;
 						}
 		
 						break;
@@ -87,7 +99,7 @@ namespace Gestor_De_Libros
 						
 					case 2:
 						
-						Console.WriteLine("¿Qué libro desea elegir?");
+						Console.WriteLine("");
 						int op2 = 0;
 						try{
 						op2 = Convert.ToInt32(Console.ReadLine());
