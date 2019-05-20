@@ -122,33 +122,20 @@ namespace Gestor_De_Libros
 				if (!File.Exists(pathUsersLog))
 		        {
 					
-		            // Create a file to write to.
-		            using (StreamWriter sw = File.CreateText(pathUsersLog))
-		            {
-		                sw.WriteLine("admin");
-		                sw.WriteLine("admin");
-		            }
+					Function.WriteInFile("admin", pathUsersLog);
+		            Function.WriteInFile("admin", pathUsersLog);
 		        }
 		
 		        // Open the file to read from.
-		        using (StreamReader sr = File.OpenText(pathUsersLog))
-		        {
-		            string s;
-		            while ((s = sr.ReadLine()) != null)
-		            {
-		                Console.WriteLine(s);
-		            }
-		        }
+				Console.WriteLine(Function.ReadFile(pathUsersLog));
 			}else{
 				Console.WriteLine("The path already exists :)");
-				using (StreamReader sr = File.OpenText(pathUsersLog))
+				if (!File.Exists(pathUsersLog))
 		        {
-		            string s;
-		            while ((s = sr.ReadLine()) != null)
-		            {
-		                Console.WriteLine(s);
-		            }
+					Function.WriteInFile("admin", pathUsersLog);
+		            Function.WriteInFile("admin", pathUsersLog);
 		        }
+				Console.WriteLine(Function.ReadFile(pathUsersLog));
 				Console.ReadKey(true);
 			}
 			
@@ -167,8 +154,6 @@ namespace Gestor_De_Libros
 		                Console.WriteLine(s);
 		            }
 		        }
-			}else{
-				
 			}
 			
 		} // End of CreateDataForDefault()
