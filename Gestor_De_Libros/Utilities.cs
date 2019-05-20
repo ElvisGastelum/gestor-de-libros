@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 
 namespace Gestor_De_Libros
@@ -14,7 +14,7 @@ namespace Gestor_De_Libros
 		public Utilities()
 		{
 			pathDataProject = program.PathDataProject;
-		}
+		}// End of Utilities()
 		
 		public void Login(){
 			string username = null,password = null, userIn = null, passIn = null;
@@ -45,10 +45,10 @@ namespace Gestor_De_Libros
 				Console.Write("LOGIN FALLIDO"); 
 				Console.ReadKey(true);
 			}	
-		}
+		}// End of Login()
 		public void Register(){
 			
-		}
+		}// End of Register()
 		public void CreateDirectory(string path){
 			try 
 	        {
@@ -70,16 +70,41 @@ namespace Gestor_De_Libros
 		}
 		public void DeleteDirectory(string path){
 			Directory.Delete(path, true);
+		}// End of CreateDirectory()
+		public void WriteInFile(string message , string path){
+			// Create a file to write to.
+			using (StreamWriter sw = new StreamWriter(path, true)){
+		    	sw.WriteLine(message);
+		    }
+		}// End of WriteInFile()
+		
+		public void OverwriteInFile(string message , string path){
+			// Create a file to write to.
+			using (StreamWriter sw = new StreamWriter(path, false)){
+		        sw.WriteLine(message);
+		    }
+		    
+		}// End of OverwriteInFile()
+		
+		public string ReadFile(string path){
+			string lines = null;
+			using (StreamReader sr = File.OpenText(path)){
+				lines = sr.ReadToEnd();
+		    }
+			return lines;
 		}
 		
+
 		public void ListOfBooks(){
 			DirectoryInfo dir = new DirectoryInfo(@"C:\Users\Yisus\Desktop\gestor-de-libros-master\Gestor_De_Libros\archives\Libros");
 			int i=0;
-            foreach (var fi in dir.GetFiles())
-            {
-            	i++;
-                Console.WriteLine(i+".- "+fi.Name);
-            }
-		}
-	}
+      foreach (var fi in dir.GetFiles()){
+        i++;
+        Console.WriteLine(i+".- "+fi.Name);
+      }
+	  } // End of ListOfBooks()
+    
+    
+    
+	} // End of Utilies
 }
