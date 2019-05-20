@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 
 namespace Gestor_De_Libros
@@ -94,7 +94,17 @@ namespace Gestor_De_Libros
 			return lines;
 		}
 		
-		
-		
+
+		public void ListOfBooks(){
+			DirectoryInfo dir = new DirectoryInfo(@"C:\Users\Yisus\Desktop\gestor-de-libros-master\Gestor_De_Libros\archives\Libros");
+			int i=0;
+      foreach (var fi in dir.GetFiles()){
+        i++;
+        Console.WriteLine(i+".- "+fi.Name);
+      }
+	  } // End of ListOfBooks()
+    
+    
+    
 	} // End of Utilies
 }
