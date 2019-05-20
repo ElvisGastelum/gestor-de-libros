@@ -1,9 +1,0 @@
-Nombre del libro: La Biblia de CSharp - Anaya
-
-Autor: Jason Jeff Brian Beres
-
-Año de impresión: 2003
-
-ISBN: 978-844-151-484-3
-
-No. Páginas: 861

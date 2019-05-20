@@ -71,5 +71,15 @@ namespace Gestor_De_Libros
 		public void DeleteDirectory(string path){
 			Directory.Delete(path, true);
 		}
+		
+		public void ListOfBooks(){
+			DirectoryInfo dir = new DirectoryInfo(@"C:\Users\Yisus\Desktop\gestor-de-libros-master\Gestor_De_Libros\archives\Libros");
+			int i=0;
+            foreach (var fi in dir.GetFiles())
+            {
+            	i++;
+                Console.WriteLine(i+".- "+fi.Name);
+            }
+		}
 	}
 }
