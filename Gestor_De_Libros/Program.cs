@@ -12,7 +12,13 @@ namespace Gestor_De_Libros
 		string pathBooks = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\dataProject\Registry\Books";
 		string pathBooksBookshelves = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\dataProject\Registry\Books\bookshelves";
 		string pathlogs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\dataProject\Logs";
+		string pathPersons = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\dataProject\Registry\Persons";
 
+		public string PathPersons {
+			get {
+				return pathPersons;
+			}
+		}
 		public string Pathlogs {
 			get {
 				return pathlogs;
@@ -44,6 +50,7 @@ namespace Gestor_De_Libros
 		{
 			Utilities Function = new Utilities();
 			Program program = new Program();
+			Person person = new Person();
 			Console.Title = "Login";
 			Console.BackgroundColor = ConsoleColor.White;
 			Console.ForegroundColor = ConsoleColor.Black;
@@ -66,7 +73,7 @@ namespace Gestor_De_Libros
 				Console.WriteLine("Bienvenido\n");
 				Console.WriteLine("¿Qué desea realizar?");
 				Console.WriteLine("1. Buscar Libro en estanteria");
-				Console.WriteLine("2. Registrar prestamo");
+				Console.WriteLine("2. Registrar persona");
 				Console.WriteLine("3. Consultar prestamos");
 				Console.WriteLine("4. Salir\n");
 				Console.Write("Opción: ");
@@ -126,13 +133,24 @@ namespace Gestor_De_Libros
 						
 					case 2:
 						
-						Console.WriteLine("");
-						int op2 = 0;
-						try{
-						op2 = Convert.ToInt32(Console.ReadLine());
-						}catch(Exception e){
-							Console.WriteLine(e.Message);
-						}
+						Console.Clear();
+						string name="",lastName="",age="",ocupation="",phone="",mail="";
+						Console.Write("Nombre: ");
+						name = Console.ReadLine();
+						Console.Write("Apellido: ");
+						lastName = Console.ReadLine();
+						Console.Write("Edad: ");
+						age = Console.ReadLine();
+						Console.Write("Ocupación: ");
+						ocupation = Console.ReadLine();
+						Console.Write("Número de Celular: ");
+						phone = Console.ReadLine();
+						Console.Write("Correo: ");
+						mail  = Console.ReadLine();
+						person.Register(program.PathPersons, name, lastName, age, ocupation, phone, mail);
+						Console.WriteLine("Datos guardados con éxito.");
+						Console.Write("Presione enter para continuar...");
+						Console.ReadKey();
 						break;
 						
 					case 4:
@@ -162,7 +180,9 @@ namespace Gestor_De_Libros
 			DateTime now = DateTime.Now;
 			string logDate = now.ToString();
 			
-			
+			if (!Directory.Exists(program.PathPersons)) {
+				Function.CreateDirectory(program.PathPersons);
+			}
 			
 			if (!Directory.Exists(program.Pathlogs)) {
 				Function.CreateDirectory(program.Pathlogs);
