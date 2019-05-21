@@ -10,6 +10,7 @@ namespace Gestor_De_Libros
 		readonly string pathDataProject = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\dataProject";
 		string pathUsers = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\dataProject\Users";
 		string pathBooks = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\dataProject\Registry\Books";
+		string pathBooksBookshelves = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\dataProject\Registry\Books\bookshelves";
 		string pathlogs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\dataProject\Logs";
 
 		public string Pathlogs {
@@ -34,6 +35,11 @@ namespace Gestor_De_Libros
 			}
 		}
 
+		public string PathBooksBookshelves {
+			get {
+				return pathBooksBookshelves;
+			}
+		}
 		public static void Main(string[] args)
 		{
 			Utilities Function = new Utilities();
@@ -59,7 +65,7 @@ namespace Gestor_De_Libros
 				Console.Clear();
 				Console.WriteLine("Bienvenido\n");
 				Console.WriteLine("¿Qué desea realizar?");
-				Console.WriteLine("1. Buscar Libro");
+				Console.WriteLine("1. Buscar Libro en estanteria");
 				Console.WriteLine("2. Registrar prestamo");
 				Console.WriteLine("3. Consultar prestamos");
 				Console.WriteLine("4. Salir\n");
@@ -78,7 +84,7 @@ namespace Gestor_De_Libros
 						Console.Clear();
 						Console.Title = "Biblioteca";
 						Console.WriteLine("A continuación, se muestran los libros disponibles:\n");
-						Function.ListOfBooks();
+						Function.ListOfBooks(program.PathBooksBookshelves);
 						
 						Console.WriteLine("\n¿Qué libro desea elegir?");
 						Console.Write("\nRespuesta: ");
@@ -92,14 +98,14 @@ namespace Gestor_De_Libros
 						
 							if(BookSelected == 1){
 							Console.Clear();
-							string Ruta= Function.ReadFile(string.Format(@"{0}\Caperucita Roja.txt", program.PathBooks));
+							string Ruta= Function.ReadFile(string.Format(@"{0}\Caperucita Roja.txt", program.PathBooksBookshelves));
 							detallesDelLibro(Ruta);
 							Console.ReadKey();
 							}
 						
 						if(BookSelected == 2){
 							Console.Clear();
-							string Ruta = Function.ReadFile(string.Format(@"{0}\La Biblia de CSharp - Anaya.txt", program.PathBooks));
+							string Ruta = Function.ReadFile(string.Format(@"{0}\La Biblia de CSharp - Anaya.txt", program.PathBooksBookshelves));
 							
 							detallesDelLibro(Ruta);
 							Console.ReadKey();
@@ -107,7 +113,7 @@ namespace Gestor_De_Libros
 						
 							if(BookSelected == 3){
 							Console.Clear();
-							string Ruta = Function.ReadFile(string.Format(@"{0}\Los Tres Cochinitos.txt", program.PathBooks));
+							string Ruta = Function.ReadFile(string.Format(@"{0}\Los Tres Cochinitos.txt", program.PathBooksBookshelves));
 							detallesDelLibro(Ruta);
 							Console.ReadKey();
 						}else{
@@ -135,7 +141,7 @@ namespace Gestor_De_Libros
 						Console.ReadKey(true);
 						string logDate = now.ToString();
 			
-						Function.WriteLineInFile("Salida >> Log: " + logDate, program.Pathlogs + @"\logs.txt");
+						Function.WriteLineInFile("Salida >> Log: " + logDate + " >> User: admin", program.Pathlogs + @"\logs.txt");
 						Environment.Exit(0);
 						break;
 					default:
@@ -161,7 +167,7 @@ namespace Gestor_De_Libros
 			if (!Directory.Exists(program.Pathlogs)) {
 				Function.CreateDirectory(program.Pathlogs);
 			}
-			Function.WriteLineInFile("Entrada >> Log: " + logDate, program.Pathlogs + @"\logs.txt");
+			Function.WriteLineInFile("Entrada >> Log: " + logDate + " >> User: admin", program.Pathlogs + @"\logs.txt");
 			if (!Directory.Exists(pathUsers)) {
 				Function.CreateDirectory(pathUsers);
 				
@@ -182,8 +188,8 @@ namespace Gestor_De_Libros
 			}
 			
 			if (!Directory.Exists(program.PathDataProject + @"\Registry")) {
-				string pathBooksIn = program.PathBooks +  @"\";
-				Function.CreateDirectory(program.PathBooks);
+				string pathBooksIn = program.PathBooksBookshelves + @"\";
+				Function.CreateDirectory(program.PathBooksBookshelves);
 				
 				CreateBook(pathBooksIn, "La Biblia de CSharp - Anaya", "Jason Jeff Brian Beres", "2003", "978-844-151-484-3", "861");
 				CreateBook(pathBooksIn, "Caperucita Roja", "Wilhelm i Jacob Grimm", "1697, 1812", "978-84-7864-851-1", "24");
