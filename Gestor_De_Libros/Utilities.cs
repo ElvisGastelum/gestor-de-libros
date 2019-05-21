@@ -99,8 +99,8 @@ namespace Gestor_De_Libros
 		}
 		
 
-		public void ListOfBooks(){
-			DirectoryInfo dir = new DirectoryInfo(program.PathBooks + @"\");
+		public void ListOfBooks(string path){
+			DirectoryInfo dir = new DirectoryInfo(path + @"\");
 			int i=0;
      	 	foreach (var fi in dir.GetFiles()){
         		i++;
