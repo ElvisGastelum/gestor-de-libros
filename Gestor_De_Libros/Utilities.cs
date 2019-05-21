@@ -71,10 +71,17 @@ namespace Gestor_De_Libros
 		public void DeleteDirectory(string path){
 			Directory.Delete(path, true);
 		}// End of CreateDirectory()
-		public void WriteInFile(string message , string path){
+		public void WriteLineInFile(string message , string path){
 			// Create a file to write to.
 			using (StreamWriter sw = new StreamWriter(path, true)){
 		    	sw.WriteLine(message);
+		    }
+		}// End of WriteInFile()
+		
+		public void WriteInFile(string message , string path){
+			// Create a file to write to.
+			using (StreamWriter sw = new StreamWriter(path, true)){
+		    	sw.Write(message);
 		    }
 		}// End of WriteInFile()
 		
@@ -96,13 +103,13 @@ namespace Gestor_De_Libros
 		
 
 		public void ListOfBooks(){
-			DirectoryInfo dir = new DirectoryInfo(@"C:\Users\Yisus\Desktop\gestor-de-libros-master\Gestor_De_Libros\archives\Libros");
+			DirectoryInfo dir = new DirectoryInfo(program.PathBooks + @"\");
 			int i=0;
-      foreach (var fi in dir.GetFiles()){
-        i++;
-        Console.WriteLine(i+".- "+fi.Name);
-      }
-	  } // End of ListOfBooks()
+     	 	foreach (var fi in dir.GetFiles()){
+        		i++;
+        		Console.WriteLine(i+".- "+fi.Name);
+      		}
+	  	} // End of ListOfBooks()
     
     
     
