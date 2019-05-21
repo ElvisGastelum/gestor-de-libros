@@ -46,9 +46,6 @@ namespace Gestor_De_Libros
 				Console.ReadKey(true);
 			}	
 		}// End of Login()
-		public void Register(){
-			
-		}// End of Register()
 		public void CreateDirectory(string path){
 			try 
 	        {

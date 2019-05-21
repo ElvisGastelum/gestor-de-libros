@@ -59,7 +59,7 @@ namespace Gestor_De_Libros
 				Console.Clear();
 				Console.WriteLine("Bienvenido\n");
 				Console.WriteLine("¿Qué desea realizar?");
-				Console.WriteLine("1. Buscar Libro");
+				Console.WriteLine("1. Buscar Libro en estanteria");
 				Console.WriteLine("2. Registrar prestamo");
 				Console.WriteLine("3. Consultar prestamos");
 				Console.WriteLine("4. Salir\n");
@@ -92,14 +92,14 @@ namespace Gestor_De_Libros
 						
 							if(BookSelected == 1){
 							Console.Clear();
-							string Ruta= Function.ReadFile(string.Format(@"{0}\Caperucita Roja.txt", program.PathBooks));
+							string Ruta= Function.ReadFile(string.Format(@"{0}\bookshelves\Caperucita Roja.txt", program.PathBooks));
 							detallesDelLibro(Ruta);
 							Console.ReadKey();
 							}
 						
 						if(BookSelected == 2){
 							Console.Clear();
-							string Ruta = Function.ReadFile(string.Format(@"{0}\La Biblia de CSharp - Anaya.txt", program.PathBooks));
+							string Ruta = Function.ReadFile(string.Format(@"{0}\bookshelves\La Biblia de CSharp - Anaya.txt", program.PathBooks));
 							
 							detallesDelLibro(Ruta);
 							Console.ReadKey();
@@ -107,7 +107,7 @@ namespace Gestor_De_Libros
 						
 							if(BookSelected == 3){
 							Console.Clear();
-							string Ruta = Function.ReadFile(string.Format(@"{0}\Los Tres Cochinitos.txt", program.PathBooks));
+							string Ruta = Function.ReadFile(string.Format(@"{0}\bookshelves\Los Tres Cochinitos.txt", program.PathBooks));
 							detallesDelLibro(Ruta);
 							Console.ReadKey();
 						}else{
@@ -135,7 +135,7 @@ namespace Gestor_De_Libros
 						Console.ReadKey(true);
 						string logDate = now.ToString();
 			
-						Function.WriteLineInFile("Salida >> Log: " + logDate, program.Pathlogs + @"\logs.txt");
+						Function.WriteLineInFile("Salida >> Log: " + logDate + " >> User: admin", program.Pathlogs + @"\logs.txt");
 						Environment.Exit(0);
 						break;
 					default:
@@ -161,7 +161,7 @@ namespace Gestor_De_Libros
 			if (!Directory.Exists(program.Pathlogs)) {
 				Function.CreateDirectory(program.Pathlogs);
 			}
-			Function.WriteLineInFile("Entrada >> Log: " + logDate, program.Pathlogs + @"\logs.txt");
+			Function.WriteLineInFile("Entrada >> Log: " + logDate + " >> User: admin", program.Pathlogs + @"\logs.txt");
 			if (!Directory.Exists(pathUsers)) {
 				Function.CreateDirectory(pathUsers);
 				
@@ -182,8 +182,8 @@ namespace Gestor_De_Libros
 			}
 			
 			if (!Directory.Exists(program.PathDataProject + @"\Registry")) {
-				string pathBooksIn = program.PathBooks +  @"\";
-				Function.CreateDirectory(program.PathBooks);
+				string pathBooksIn = program.PathBooks +  @"\bookshelves\";
+				Function.CreateDirectory(program.PathBooks  +  @"\bookshelves");
 				
 				CreateBook(pathBooksIn, "La Biblia de CSharp - Anaya", "Jason Jeff Brian Beres", "2003", "978-844-151-484-3", "861");
 				CreateBook(pathBooksIn, "Caperucita Roja", "Wilhelm i Jacob Grimm", "1697, 1812", "978-84-7864-851-1", "24");
