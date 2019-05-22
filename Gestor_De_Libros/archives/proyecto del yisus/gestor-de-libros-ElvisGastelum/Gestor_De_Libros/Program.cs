@@ -56,11 +56,18 @@ namespace Gestor_De_Libros
 			Console.ForegroundColor = ConsoleColor.Black;
 			Console.Clear();
 			int op=0;
+			double Copias = 0, Money = 0, Registrar = 0;
 			
 			CreateDataForDefault();
 			
 			
+			Console.WriteLine("Ingresar como:");
+			Console.WriteLine("1. Administrador");
+			Console.WriteLine("2. Usuario normal\n");
+			Console.Write("Opción: ");
+			string respMain = Console.ReadLine();
 			
+			if(respMain == "1"){
 			Function.Login();
 			Console.Clear();
 			
@@ -72,10 +79,10 @@ namespace Gestor_De_Libros
 				Console.Clear();
 				Console.WriteLine("Bienvenido\n");
 				Console.WriteLine("¿Qué desea realizar?");
-				Console.WriteLine("1. Ver Libros en estanteria");
+				Console.WriteLine("1. Buscar Libro en estanteria");
 				Console.WriteLine("2. Registrar persona");
 				Console.WriteLine("3. Consultar prestamos");
-				Console.WriteLine("4. Buscar Libros");
+				Console.WriteLine("4. Realizar impresión o copia");
 				Console.WriteLine("5. Salir\n");
 				Console.Write("Opción: ");
 				
@@ -91,42 +98,28 @@ namespace Gestor_De_Libros
 					case 1:
 						Console.Clear();
 						Console.Title = "Biblioteca";
-						Console.WriteLine("A continuación, se muestran los libros disponibles:\n");
-						Function.ListOfBooks(program.PathBooksBookshelves);
+						Console.Write("\nDigite el nombre del libro: ");
 						
-						Console.WriteLine("\n¿Qué libro desea elegir?");
-						Console.Write("\nRespuesta: ");
+						string BookSelected = Console.ReadLine();
 						
-						int BookSelected = 0;
-						try{
-						BookSelected = Convert.ToInt32(Console.ReadLine());
-						}catch(Exception e){
-							Console.WriteLine(e.Message);
-						}
-						
-							if(BookSelected == 1){
-							Console.Clear();
-							string Ruta= Function.ReadFile(string.Format(@"{0}\Caperucita Roja.txt", program.PathBooksBookshelves));
-							detallesDelLibro(Ruta);
-							Console.ReadKey();
-							}
-						
-						if(BookSelected == 2){
-							Console.Clear();
-							string Ruta = Function.ReadFile(string.Format(@"{0}\La Biblia de CSharp - Anaya.txt", program.PathBooksBookshelves));
-							
-							detallesDelLibro(Ruta);
-							Console.ReadKey();
-							}
-						
-							if(BookSelected == 3){
-							Console.Clear();
-							string Ruta = Function.ReadFile(string.Format(@"{0}\Los Tres Cochinitos.txt", program.PathBooksBookshelves));
-							detallesDelLibro(Ruta);
-							Console.ReadKey();
-						}else{
-							continue;
-						}
+						try 
+        				{
+           				 // Only get files that begin with the letter "c".
+				        string[] dirs = Directory.GetFiles(program.PathBooksBookshelves, BookSelected);
+				        Console.WriteLine(dirs.Length);
+				        foreach (string dir in dirs) 
+				        {
+				          Console.WriteLine(dir);
+				         }
+				        } 
+				        catch (Exception e) 
+				        {
+				            Console.WriteLine(e.Message);
+				        }
+				        
+				        Console.ReadKey();
+				        
+				        
 		
 						break;
 						
@@ -151,18 +144,37 @@ namespace Gestor_De_Libros
 						person.Register(program.PathPersons, name, lastName, age, ocupation, phone, mail);
 						Console.WriteLine("Datos guardados con éxito.");
 						Console.Write("Presione enter para continuar...");
+						Registrar +=20;
+						Money = Money + Registrar;
 						Console.ReadKey();
 						break;
 						
-					
+						
 					case 4:
-						Console.Clear();
-						Console.Write("Parametro a buscar: ");
-						string input = Console.ReadLine();
-						Function.SearchFile(program.PathBooksBookshelves + @"\", "*" + input + "*");
-						Console.ReadKey();
+					Console.Title = "Impresora";
+					Console.Clear();
+					Console.WriteLine("¿Cuántas copias desea?\n");
+					Console.Write("Respuesta: ");
+					
+					try{
+						Copias = Convert.ToInt32(Console.ReadLine());
+					}catch(Exception e){
+						Console.WriteLine(e.Message);
 						
-						break;
+						
+					}
+					
+					double gainCopias = Copias*.5;
+					Console.Clear();
+					if(gainCopias == 0){
+						Console.WriteLine("Error al imprimir.");
+						Console.ReadKey();
+					}else{
+					Console.WriteLine("Copias realizadas con éxito, total a pagar: " + gainCopias + "$");
+					Console.ReadKey();
+					}
+					Money = Money + gainCopias;
+					break;
 						
 						
 					case 5:
@@ -170,6 +182,8 @@ namespace Gestor_De_Libros
 						Console.WriteLine(now);
 						Console.ReadKey(true);
 						string logDate = now.ToString();
+						Console.WriteLine(Money);
+						Console.ReadKey();
 			
 						Function.WriteLineInFile("Salida >> Log: " + logDate + " >> User: admin", program.Pathlogs + @"\logs.txt");
 						Environment.Exit(0);
@@ -180,6 +194,59 @@ namespace Gestor_De_Libros
 						break;
 			
 				}
+			}
+			}else{
+				while(true){
+				Console.Clear();
+				Console.Title = "Menú";
+				Console.WriteLine("Bienvenido Usuario\n");
+				Console.WriteLine("¿Qué desea realizar?\n");
+				Console.WriteLine("1. Buscar libro");
+				Console.WriteLine("2. Solicitar una copia o impresión");
+				Console.WriteLine("3. Salir\n\n");
+				Console.Write("Opción: ");
+				
+				string respUser = Console.ReadLine();
+				
+				if(respUser == "1"){
+					
+				}
+				
+				if(respUser == "2"){
+					Console.Title = "Impresora";
+					Console.Clear();
+					Console.WriteLine("¿Cuántas copias desea?\n");
+					Console.Write("Respuesta: ");
+					
+					try{
+						Copias = Convert.ToInt32(Console.ReadLine());
+					}catch(Exception e){
+						Console.WriteLine(e.Message);
+						
+						
+					}
+					
+					double gainCopias = Copias*.5;
+					Console.Clear();
+					if(gainCopias == 0){
+						Console.WriteLine("Error al imprimir.");
+						Console.ReadKey();
+					}else{
+					Console.WriteLine("Copias realizadas con éxito, total a pagar: " + gainCopias + "$");
+					Console.ReadKey();
+					}
+					Money = Money + gainCopias;
+				}
+				
+				if(respUser == "3"){
+					Environment.Exit(0);
+					break;
+				}
+				
+				}
+				
+				Console.WriteLine("Gracias por su preferencia :)");
+				Console.ReadKey();
 			}
 		} // End of Main()
 		

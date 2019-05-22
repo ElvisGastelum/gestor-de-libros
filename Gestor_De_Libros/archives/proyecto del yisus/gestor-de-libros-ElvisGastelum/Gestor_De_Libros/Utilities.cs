@@ -107,23 +107,8 @@ namespace Gestor_De_Libros
         		Console.WriteLine(i+".- "+fi.Name);
       		}
 	  	} // End of ListOfBooks()
-    	
-		public void SearchFile(string path, string parameter){
-	    	try 
-	        {
-	            // Only get files that begin with the letter "c".
-	            string[] dirs = Directory.GetFiles(path, parameter);
-	            Console.WriteLine("El numero de archivos encontrados es {0} y son: ", dirs.Length);
-	            foreach (string dir in dirs) 
-	            {
-	            	Console.WriteLine(dir);
-	            }
-	        } 
-	        catch (Exception e) 
-	        {
-	            Console.WriteLine("The process failed: {0}", e.ToString());
-	        }
-		}// End of SearchFile
+    
+    
     
 	} // End of Utilies
 }
