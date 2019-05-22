@@ -207,7 +207,7 @@ namespace Gestor_De_Libros
 		        }
 			}
 			
-			if (!Directory.Exists(program.PathDataProject + @"\Registry")) {
+			if (!Directory.Exists(program.PathBooksBookshelves)) {
 				string pathBooksIn = program.PathBooksBookshelves + @"\";
 				Function.CreateDirectory(program.PathBooksBookshelves);
 				
