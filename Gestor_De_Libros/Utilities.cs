@@ -46,9 +46,6 @@ namespace Gestor_De_Libros
 				Console.ReadKey(true);
 			}	
 		}// End of Login()
-		public void Register(){
-			
-		}// End of Register()
 		public void CreateDirectory(string path){
 			try 
 	        {
@@ -87,7 +84,7 @@ namespace Gestor_De_Libros
 		
 		public void OverwriteInFile(string message , string path){
 			// Create a file to write to.
-			using (StreamWriter sw = new StreamWriter(path, false)){
+			using (StreamWriter sw = new StreamWriter(path)){
 		        sw.WriteLine(message);
 		    }
 		    
@@ -102,8 +99,8 @@ namespace Gestor_De_Libros
 		}
 		
 
-		public void ListOfBooks(){
-			DirectoryInfo dir = new DirectoryInfo(program.PathBooks + @"\");
+		public void ListOfBooks(string path){
+			DirectoryInfo dir = new DirectoryInfo(path + @"\");
 			int i=0;
      	 	foreach (var fi in dir.GetFiles()){
         		i++;

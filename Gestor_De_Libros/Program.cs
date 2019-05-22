@@ -10,8 +10,15 @@ namespace Gestor_De_Libros
 		readonly string pathDataProject = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\dataProject";
 		string pathUsers = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\dataProject\Users";
 		string pathBooks = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\dataProject\Registry\Books";
+		string pathBooksBookshelves = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\dataProject\Registry\Books\bookshelves";
 		string pathlogs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\dataProject\Logs";
+		string pathPersons = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\dataProject\Registry\Persons";
 
+		public string PathPersons {
+			get {
+				return pathPersons;
+			}
+		}
 		public string Pathlogs {
 			get {
 				return pathlogs;
@@ -34,10 +41,16 @@ namespace Gestor_De_Libros
 			}
 		}
 
+		public string PathBooksBookshelves {
+			get {
+				return pathBooksBookshelves;
+			}
+		}
 		public static void Main(string[] args)
 		{
 			Utilities Function = new Utilities();
 			Program program = new Program();
+			Person person = new Person();
 			Console.Title = "Login";
 			Console.BackgroundColor = ConsoleColor.White;
 			Console.ForegroundColor = ConsoleColor.Black;
@@ -59,8 +72,8 @@ namespace Gestor_De_Libros
 				Console.Clear();
 				Console.WriteLine("Bienvenido\n");
 				Console.WriteLine("¿Qué desea realizar?");
-				Console.WriteLine("1. Buscar Libro");
-				Console.WriteLine("2. Registrar prestamo");
+				Console.WriteLine("1. Buscar Libro en estanteria");
+				Console.WriteLine("2. Registrar persona");
 				Console.WriteLine("3. Consultar prestamos");
 				Console.WriteLine("4. Salir\n");
 				Console.Write("Opción: ");
@@ -78,7 +91,7 @@ namespace Gestor_De_Libros
 						Console.Clear();
 						Console.Title = "Biblioteca";
 						Console.WriteLine("A continuación, se muestran los libros disponibles:\n");
-						Function.ListOfBooks();
+						Function.ListOfBooks(program.PathBooksBookshelves);
 						
 						Console.WriteLine("\n¿Qué libro desea elegir?");
 						Console.Write("\nRespuesta: ");
@@ -92,14 +105,14 @@ namespace Gestor_De_Libros
 						
 							if(BookSelected == 1){
 							Console.Clear();
-							string Ruta= Function.ReadFile(string.Format(@"{0}\Caperucita Roja.txt", program.PathBooks));
+							string Ruta= Function.ReadFile(string.Format(@"{0}\Caperucita Roja.txt", program.PathBooksBookshelves));
 							detallesDelLibro(Ruta);
 							Console.ReadKey();
 							}
 						
 						if(BookSelected == 2){
 							Console.Clear();
-							string Ruta = Function.ReadFile(string.Format(@"{0}\La Biblia de CSharp - Anaya.txt", program.PathBooks));
+							string Ruta = Function.ReadFile(string.Format(@"{0}\La Biblia de CSharp - Anaya.txt", program.PathBooksBookshelves));
 							
 							detallesDelLibro(Ruta);
 							Console.ReadKey();
@@ -107,7 +120,7 @@ namespace Gestor_De_Libros
 						
 							if(BookSelected == 3){
 							Console.Clear();
-							string Ruta = Function.ReadFile(string.Format(@"{0}\Los Tres Cochinitos.txt", program.PathBooks));
+							string Ruta = Function.ReadFile(string.Format(@"{0}\Los Tres Cochinitos.txt", program.PathBooksBookshelves));
 							detallesDelLibro(Ruta);
 							Console.ReadKey();
 						}else{
@@ -120,13 +133,24 @@ namespace Gestor_De_Libros
 						
 					case 2:
 						
-						Console.WriteLine("");
-						int op2 = 0;
-						try{
-						op2 = Convert.ToInt32(Console.ReadLine());
-						}catch(Exception e){
-							Console.WriteLine(e.Message);
-						}
+						Console.Clear();
+						string name="",lastName="",age="",ocupation="",phone="",mail="";
+						Console.Write("Nombre: ");
+						name = Console.ReadLine();
+						Console.Write("Apellido: ");
+						lastName = Console.ReadLine();
+						Console.Write("Edad: ");
+						age = Console.ReadLine();
+						Console.Write("Ocupación: ");
+						ocupation = Console.ReadLine();
+						Console.Write("Número de Celular: ");
+						phone = Console.ReadLine();
+						Console.Write("Correo: ");
+						mail  = Console.ReadLine();
+						person.Register(program.PathPersons, name, lastName, age, ocupation, phone, mail);
+						Console.WriteLine("Datos guardados con éxito.");
+						Console.Write("Presione enter para continuar...");
+						Console.ReadKey();
 						break;
 						
 					case 4:
@@ -135,7 +159,7 @@ namespace Gestor_De_Libros
 						Console.ReadKey(true);
 						string logDate = now.ToString();
 			
-						Function.WriteLineInFile("Salida >> Log: " + logDate, program.Pathlogs + @"\logs.txt");
+						Function.WriteLineInFile("Salida >> Log: " + logDate + " >> User: admin", program.Pathlogs + @"\logs.txt");
 						Environment.Exit(0);
 						break;
 					default:
@@ -156,12 +180,14 @@ namespace Gestor_De_Libros
 			DateTime now = DateTime.Now;
 			string logDate = now.ToString();
 			
-			
+			if (!Directory.Exists(program.PathPersons)) {
+				Function.CreateDirectory(program.PathPersons);
+			}
 			
 			if (!Directory.Exists(program.Pathlogs)) {
 				Function.CreateDirectory(program.Pathlogs);
 			}
-			Function.WriteLineInFile("Entrada >> Log: " + logDate, program.Pathlogs + @"\logs.txt");
+			Function.WriteLineInFile("Entrada >> Log: " + logDate + " >> User: admin", program.Pathlogs + @"\logs.txt");
 			if (!Directory.Exists(pathUsers)) {
 				Function.CreateDirectory(pathUsers);
 				
@@ -181,9 +207,9 @@ namespace Gestor_De_Libros
 		        }
 			}
 			
-			if (!Directory.Exists(program.PathDataProject + @"\Registry")) {
-				string pathBooksIn = program.PathBooks +  @"\";
-				Function.CreateDirectory(program.PathBooks);
+			if (!Directory.Exists(program.PathBooksBookshelves)) {
+				string pathBooksIn = program.PathBooksBookshelves + @"\";
+				Function.CreateDirectory(program.PathBooksBookshelves);
 				
 				CreateBook(pathBooksIn, "La Biblia de CSharp - Anaya", "Jason Jeff Brian Beres", "2003", "978-844-151-484-3", "861");
 				CreateBook(pathBooksIn, "Caperucita Roja", "Wilhelm i Jacob Grimm", "1697, 1812", "978-84-7864-851-1", "24");
