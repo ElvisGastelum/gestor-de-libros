@@ -84,7 +84,7 @@ namespace Gestor_De_Libros
 		
 		public void OverwriteInFile(string message , string path){
 			// Create a file to write to.
-			using (StreamWriter sw = new StreamWriter(path, false)){
+			using (StreamWriter sw = new StreamWriter(path)){
 		        sw.WriteLine(message);
 		    }
 		    
